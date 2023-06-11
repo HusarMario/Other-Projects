@@ -1,0 +1,76 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data
+number DB 5 dup(0)
+divideBy DW 10
+isNegative DB 0
+
+.code
+main PROC
+	call Clrscr
+
+	mov AX, -123
+	xor DX, DX
+	lea EBX, number
+	xor ESI, ESI
+
+	test AX, 0FFFFh			;logicky sucin operandov bez zmeny
+	js IsNegativeStart
+
+	LoopInput:
+		idiv divideBy
+
+		cmp isNegative, 1
+		je IsNegativeLoop
+		
+		LoopInputContinue:
+			OR DX, 30h
+
+			mov [EBX + ESI], DX
+			inc ESI
+			xor DX, DX
+			
+			cmp isNegative, 1
+			je IsNegativeSetDX
+
+			LoopInputEnd:
+				cmp AX, 0
+				jnz LoopInput
+				jmp WriteResult
+
+	IsNegativeStart:
+		mov isNegative, 1
+		or DX, 0FFFFh
+		jmp LoopInput
+
+	IsNegativeLoop:
+		neg DX
+		jmp LoopInputContinue
+
+	IsNegativeSetDX:
+		or DX, 0FFFFh
+		jmp LoopInputEnd
+
+	WriteResult:
+		mov ECX, ESI
+		
+		cmp isNegative, 1
+		je IsNegativeWriteResult
+		
+		WriteResultLoop:
+			mov AL, [EBX + ECX - 1]
+			call WriteChar
+			Loop WriteResultLoop
+			jmp EndProgram
+
+	IsNegativeWriteResult:
+		mov AL, '-'
+		call WriteChar
+		jmp WriteResultLoop
+	
+	EndProgram:
+		exit
+main ENDP
+
+END main

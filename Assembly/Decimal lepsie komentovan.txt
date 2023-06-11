@@ -1,0 +1,67 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data
+Number DB 10 dup(0); jednotlive cifry ako znaky odzadu
+; pozri tab. 5, druhy riadok: http://frdsa.fri.uniza.sk/~janosik/Kniha/Instr_arit.html#idiv
+Divider DW 10; delenec, Word kvoli pouziti idiv
+Negative DB 0; priznak indikuje zaporne cislo
+
+.code
+main PROC
+	call Clrscr
+
+	; 1. Vypiste obsah registra AX v desiatkovej sustave. Zakaz pouzivat WriteInt!
+	mov AX, -25530
+	
+	; osetrenie zapornych cisel
+	test AX, 0FFFFh; nastavi flagy podla sucinu AX s pravym operandom, zaujima nas SF (Sign Flag)
+	jns Positive; jump if not sign
+	mov Negative, 1; ak je zaporne, nastavime priznak
+	Positive:
+
+	mov EBX, OFFSET Number
+	xor ESI, ESI
+
+	Division:
+		xor DX, DX; nulujem kvoli deleni, je tu zvysok a vyssi word delenca
+		
+		; osetrenie zaporneho cisla
+		cmp Negative, 1
+		jnz L1; jump if not zero
+		not DX; cislo je zaporne (najvyssi bit je 1), vo vyssom worde delenca nastavim same 1 - invertujem 0
+		L1:
+
+		idiv Divider; podiel v AX, zvysok v DX (zvysok je medzi 0 az 9 - je teda v DL)
+
+		; osetrenie zaporneho cisla
+		cmp Negative, 1
+		jnz L2; jump if not zero
+		neg DL; ak je zaporne cislo, zvysok je zaporny, musim B2 komplement
+		L2:
+
+		or DL, 30h; maska - prevod cisla na znak, pozri ASCII tabulku
+		mov [EBX + ESI], DL; zistenu cifru uz ako znak vlozim do pola Number
+		inc ESI; posuniem sa na dalsi prvok, kam pojde dalsia cifra
+		
+		cmp AX, 0; ak je delenec uz nulovy, presiel som cele cislo -> koniec
+		jnz Division; jump if not zero
+
+	mov ECX, ESI; kolkokrat som sa posunul v registri ESI, tolko cifier som nasiel, tolkokrat teda pojde aj cyklus
+
+	; osetrenie zaporneho cisla
+	cmp Negative, 1
+	jnz L3; jump if not zero
+	mov AL, '-'; ak je zaporne, vypisem najskor '-'
+	call WriteChar
+	L3:
+
+	Print:
+		mov AL, [EBX + ECX - 1]; vypisujem cifry, odzadu (-1 lebo ak som nasiel 5 cifier, posledna ma index (offset) 4)
+		call WriteChar
+		loop Print; loop dekrementuje ECX a ak je rozny od 0, skoci na navestie
+
+	exit
+main ENDP
+
+END main

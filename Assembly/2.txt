@@ -1,0 +1,92 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data	
+
+Matica	DW 2, 0, 1, 6, 6
+		DW 4, 4, 28, 8, 3
+		DW 1, 1, 5, 2, 1
+		DW 3, 3, 4, 3, 4
+		DW 5, 2, 1, 1, 5
+Body DB 100, 80, 60, 50, 45, 40, 36, 32, 29, 26, 24, 22, 20, 18, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1
+Anna DB "Anna", 0
+Lena DB "Lena", 0
+Mikaela DB "Mikaela", 0
+Petra DB "Petra", 0
+Wendy DB "Wendy", 0
+Mena DD Anna, Lena, Mikaela, Petra, Wendy
+PocMien EQU 5
+PocPretek EQU 5
+MaxHodnota DW 0
+MaxIndex DW -1
+
+.code
+main PROC
+	call Clrscr
+
+	mov ECX, PocMien		;pocitadlo loopu (Riadky)
+	xor EBX, EBX			;vynuluje offset
+
+	RiadokLoop:
+		xor ESI, ESI		;index stlpcov
+		push ECX			;odlozi riadok
+		mov ECX, PocPretek	;pocitadlo loopu (Stplpce)
+		xor EAX, EAX
+		
+		PocitanieLoop:
+			xor EDI, EDI	
+			movzx EDI, Matica[EBX + ESI * type Matica]	;ulozenie hodnoty
+			xor EDX, EDX
+			movzx EDX, Body[EDI - 1]					;ulozenie bodov
+			add EAX, EDX
+
+			;call WriteInt
+
+			inc ESI
+			loop PocitanieLoop
+
+		call WriteInt
+		call Crlf
+		pop ECX
+
+		cmp MaxIndex, -1
+		je PrvaVymena
+
+		cmp AX, MaxHodnota
+		jg Vymena
+
+PoVymene:
+		add EBX, PocPretek * type Matica	;aktualizovany offset riadku
+		loop RiadokLoop
+		jmp PoUpravach
+
+Vymena:
+		mov MaxIndex, PocMien
+		sub MaxIndex, CX
+		mov MaxHodnota, AX
+		jmp Povymene
+
+PrvaVymena:
+		mov MaxIndex, 0	
+		mov MaxHodnota, AX
+		jmp PoVymene
+
+PoUpravach:
+
+	xor EAX, EAX
+	xor EBX, EBX
+	xor EDX, EDX
+	mov SI, MaxIndex
+	imul ESI, 4
+	
+	mov AX, MaxIndex
+	call WriteInt
+	mov EDX, [Mena + ESI]
+	call WriteString
+	mov AX, MaxHodnota
+	call WriteInt
+
+	exit
+main ENDP
+
+END main

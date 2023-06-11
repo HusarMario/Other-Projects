@@ -1,0 +1,860 @@
+--------------------------------------------------------
+--  File created - nede¾a-mája-14-2023   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table CENA
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."CENA" 
+   (	"EAN_KOD" CHAR(6 BYTE), 
+	"PLATNOST_OD" DATE, 
+	"PLATNOST_DO" DATE, 
+	"VYSKA_ZLAVY" NUMBER, 
+	"CENA" NUMBER, 
+	"DATUM_ZMENY" DATE, 
+	"POUZIVATEL" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table FITNESS_CENTRUM
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."FITNESS_CENTRUM" 
+   (	"NAZOV" VARCHAR2(30 BYTE), 
+	"OKRES" VARCHAR2(30 BYTE), 
+	"OBEC" VARCHAR2(30 BYTE), 
+	"ULICA" VARCHAR2(30 BYTE), 
+	"CISLO" VARCHAR2(10 BYTE), 
+	"TELEFON" VARCHAR2(13 BYTE), 
+	"EMAIL" VARCHAR2(30 BYTE), 
+	"ID_CENTRA" CHAR(6 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table OPRAVA
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."OPRAVA" 
+   (	"EVID_CISLO" CHAR(6 BYTE), 
+	"NAHLASENIE" DATE, 
+	"ZACIATOK" DATE, 
+	"KONIEC" DATE, 
+	"POPIS" VARCHAR2(100 BYTE), 
+	"TYP_CHYBY" VARCHAR2(30 BYTE), 
+	"ID_CENTRA" CHAR(6 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table OS_UDAJE_OSOBY
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."OS_UDAJE_OSOBY" 
+   (	"ROD_CISLO" CHAR(11 BYTE), 
+	"MENO" VARCHAR2(30 BYTE), 
+	"STREDNE_MENO" VARCHAR2(30 BYTE), 
+	"PRIEZVISKO" VARCHAR2(30 BYTE), 
+	"RODNE_PRIEZVISKO" VARCHAR2(30 BYTE), 
+	"EMAIL" VARCHAR2(30 BYTE), 
+	"TELEFON" VARCHAR2(30 BYTE), 
+	"OBEC" VARCHAR2(30 BYTE), 
+	"CISLO" VARCHAR2(10 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table PONUKANA_SLUZBA
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."PONUKANA_SLUZBA" 
+   (	"ID_CENTRA" CHAR(6 BYTE), 
+	"ID_ZAMESTNANCA" CHAR(7 BYTE), 
+	"NAZOV" VARCHAR2(30 BYTE), 
+	"POPIS" VARCHAR2(100 BYTE), 
+	"EAN_KOD" CHAR(6 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table PRISLUSENSTVO
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."PRISLUSENSTVO" 
+   (	"EVID_CISLO" CHAR(6 BYTE), 
+	"HODNOTA" NUMBER, 
+	"TYP" CHAR(1 BYTE), 
+	"DATUM_ZAOBSTARANIE" DATE, 
+	"DATUM_PREVADZKA" DATE, 
+	"ID_CENTRA" CHAR(6 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table TERMIN
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."TERMIN" 
+   (	"ID_CENTRA" CHAR(6 BYTE), 
+	"ID_ZAKAZNIKA" CHAR(7 BYTE), 
+	"DATUM_TERMINU" DATE, 
+	"NAZOV" VARCHAR2(30 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table ZAKAZNIK
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."ZAKAZNIK" 
+   (	"ROD_CISLO" CHAR(11 BYTE), 
+	"ID_ZAKAZNIKA" CHAR(7 BYTE), 
+	"DATUM_REG" DATE, 
+	"DATUM_EXP" DATE, 
+	"ID_CENTRA" CHAR(6 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Table ZAMESTNANEC
+--------------------------------------------------------
+
+  CREATE TABLE "HUSAR10"."ZAMESTNANEC" 
+   (	"ROD_CISLO" CHAR(11 BYTE), 
+	"ID_ZAMESTNANCA" CHAR(7 BYTE), 
+	"DATUM_NASTUP" DATE, 
+	"POZICIA" VARCHAR2(30 BYTE), 
+	"ID_CENTRA" CHAR(6 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for View MENNYZOZNAMSTUDENTOV
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "HUSAR10"."MENNYZOZNAMSTUDENTOV" ("MENO", "PRIEZVISKO", "ST_SKUPINA") AS 
+  SELECT DISTINCT meno, priezvisko, st_skupina FROM student
+JOIN os_udaje USING(rod_cislo)
+;
+--------------------------------------------------------
+--  DDL for View OSOBY
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "HUSAR10"."OSOBY" ("MENO", "PRIEZVISKO", "ROD_CISLO") AS 
+  SELECT DISTINCT meno, priezvisko, rod_cislo FROM os_udaje
+;
+--------------------------------------------------------
+--  DDL for View POHLAD_UC
+--------------------------------------------------------
+
+  CREATE OR REPLACE FORCE EDITIONABLE VIEW "HUSAR10"."POHLAD_UC" ("MENO", "PRIEZVISKO") AS 
+  SELECT DISTINCT meno, priezvisko FROM zap_predmety
+JOIN ucitel ON(zap_predmety.prednasajuci = ucitel.os_cislo)
+;
+REM INSERTING into HUSAR10.CENA
+SET DEFINE OFF;
+Insert into HUSAR10.CENA (EAN_KOD,PLATNOST_OD,PLATNOST_DO,VYSKA_ZLAVY,CENA,DATUM_ZMENY,POUZIVATEL) values ('123456',null,null,null,'18',null,null);
+Insert into HUSAR10.CENA (EAN_KOD,PLATNOST_OD,PLATNOST_DO,VYSKA_ZLAVY,CENA,DATUM_ZMENY,POUZIVATEL) values ('124987',null,null,null,'25',null,null);
+Insert into HUSAR10.CENA (EAN_KOD,PLATNOST_OD,PLATNOST_DO,VYSKA_ZLAVY,CENA,DATUM_ZMENY,POUZIVATEL) values ('454824',null,null,null,'7,5',null,null);
+Insert into HUSAR10.CENA (EAN_KOD,PLATNOST_OD,PLATNOST_DO,VYSKA_ZLAVY,CENA,DATUM_ZMENY,POUZIVATEL) values ('484684',null,null,null,'10',to_date('13.05.23','DD.MM.RR'),'HUSAR10');
+Insert into HUSAR10.CENA (EAN_KOD,PLATNOST_OD,PLATNOST_DO,VYSKA_ZLAVY,CENA,DATUM_ZMENY,POUZIVATEL) values ('987461',to_date('05.06.23','DD.MM.RR'),to_date('05.07.23','DD.MM.RR'),'10','90',null,null);
+Insert into HUSAR10.CENA (EAN_KOD,PLATNOST_OD,PLATNOST_DO,VYSKA_ZLAVY,CENA,DATUM_ZMENY,POUZIVATEL) values ('454841',to_date('07.09.22','DD.MM.RR'),to_date('14.09.22','DD.MM.RR'),'5','10',null,null);
+Insert into HUSAR10.CENA (EAN_KOD,PLATNOST_OD,PLATNOST_DO,VYSKA_ZLAVY,CENA,DATUM_ZMENY,POUZIVATEL) values ('484688',null,null,null,'15',null,null);
+REM INSERTING into HUSAR10.FITNESS_CENTRUM
+SET DEFINE OFF;
+Insert into HUSAR10.FITNESS_CENTRUM (NAZOV,OKRES,OBEC,ULICA,CISLO,TELEFON,EMAIL,ID_CENTRA) values ('Silák','Turèianske Teplice','Turèianske Teplice','Krátka','36','0917055208','silakfitness@gmail.com','123456');
+Insert into HUSAR10.FITNESS_CENTRUM (NAZOV,OKRES,OBEC,ULICA,CISLO,TELEFON,EMAIL,ID_CENTRA) values ('Fitness u Joža','Brezno','Brezno','Krátkovská','135/5','0918756985','fitnessujoza@gmail.com','124567');
+Insert into HUSAR10.FITNESS_CENTRUM (NAZOV,OKRES,OBEC,ULICA,CISLO,TELEFON,EMAIL,ID_CENTRA) values ('Fitup','Martin','Slovany','Žarnovická','148/7','0905225485','fitupsk@gmail.com','987654');
+Insert into HUSAR10.FITNESS_CENTRUM (NAZOV,OKRES,OBEC,ULICA,CISLO,TELEFON,EMAIL,ID_CENTRA) values ('EnergyFit','Žilina','Brezany','Turèianská','1896/87','0908965445','energyfit@gmail.com','454685');
+Insert into HUSAR10.FITNESS_CENTRUM (NAZOV,OKRES,OBEC,ULICA,CISLO,TELEFON,EMAIL,ID_CENTRA) values ('Èierny pes','Levice','Levice','Nám.hrdinov','4','0917563874','ciernypes@gmail.com','484304');
+Insert into HUSAR10.FITNESS_CENTRUM (NAZOV,OKRES,OBEC,ULICA,CISLO,TELEFON,EMAIL,ID_CENTRA) values ('Matúšovo fitness','Brezno','Brezno','Štefánikovo námestie','18','0904453875','matusov_fitness@gmail.com','941625');
+REM INSERTING into HUSAR10.OPRAVA
+SET DEFINE OFF;
+Insert into HUSAR10.OPRAVA (EVID_CISLO,NAHLASENIE,ZACIATOK,KONIEC,POPIS,TYP_CHYBY,ID_CENTRA) values ('949582',to_date('21.01.20','DD.MM.RR'),to_date('22.01.20','DD.MM.RR'),to_date('22.01.20','DD.MM.RR'),'zlomený šrób','opotrebovanie','124567');
+Insert into HUSAR10.OPRAVA (EVID_CISLO,NAHLASENIE,ZACIATOK,KONIEC,POPIS,TYP_CHYBY,ID_CENTRA) values ('873664',to_date('10.03.20','DD.MM.RR'),to_date('12.03.20','DD.MM.RR'),to_date('13.03.20','DD.MM.RR'),'zaseknuté ložisko','opotrebovanie','454685');
+Insert into HUSAR10.OPRAVA (EVID_CISLO,NAHLASENIE,ZACIATOK,KONIEC,POPIS,TYP_CHYBY,ID_CENTRA) values ('873664',to_date('23.09.21','DD.MM.RR'),to_date('30.09.21','DD.MM.RR'),to_date('01.10.21','DD.MM.RR'),'ohnutá tyè','zlé zaobchádzanie','454685');
+Insert into HUSAR10.OPRAVA (EVID_CISLO,NAHLASENIE,ZACIATOK,KONIEC,POPIS,TYP_CHYBY,ID_CENTRA) values ('873664',to_date('23.09.22','DD.MM.RR'),to_date('30.09.22','DD.MM.RR'),null,'zlomená tyè','zakaznikove nervy','454685');
+Insert into HUSAR10.OPRAVA (EVID_CISLO,NAHLASENIE,ZACIATOK,KONIEC,POPIS,TYP_CHYBY,ID_CENTRA) values ('949582',to_date('21.01.21','DD.MM.RR'),to_date('22.01.21','DD.MM.RR'),to_date('22.02.21','DD.MM.RR'),'viac zlomených šróbov','opotrebovanie','124567');
+Insert into HUSAR10.OPRAVA (EVID_CISLO,NAHLASENIE,ZACIATOK,KONIEC,POPIS,TYP_CHYBY,ID_CENTRA) values ('657098',to_date('10.05.23','DD.MM.RR'),null,null,'zlomené operadlo','zle zaobchadzanie','484304');
+REM INSERTING into HUSAR10.OS_UDAJE_OSOBY
+SET DEFINE OFF;
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('690323/6745','Jožko','Igor','Milý',null,'jozkomily15@gmail.com','0917055452','Brezno','86/5434');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('881222/8239','Ferko',null,'Velký',null,'ferkovelky444@gmail.com','0918775285','Slovany','13');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('995610/8742','Milada',null,'Žižková','Žižková','miladkazizka@gmail.com','0904855485','Martin','46/750');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('020330/7264','Peter',null,'Filko',null,'petkofilko@gmail.com','0903985445','Žilina','1822/666');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('950412/9734','Ján',null,'Huper',null,'jankohuper@gmail.com','0917755452','Bánovce nad Bebravou','12');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('985702/7234','Magda','Ivana','Liská','Lepovská','magdaliska42@gmail.com','0902744485','Banská Štiavnica','1966/4');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('015102/7633','Lenka',null,'Lovkavská','Lovkavská','lenka111lovkavska@gmail.com','0907986217','Kriváò','118/5468');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('990922/3232','Filip',null,'Zelezník',null,'filipianzelez@gmail.com','0911868643','Porúbka','52/4');
+Insert into HUSAR10.OS_UDAJE_OSOBY (ROD_CISLO,MENO,STREDNE_MENO,PRIEZVISKO,RODNE_PRIEZVISKO,EMAIL,TELEFON,OBEC,CISLO) values ('881222/8846','Martin',null,'Rodný',null,'martinko@gmail.com','0918378385','Slovany','17');
+REM INSERTING into HUSAR10.PONUKANA_SLUZBA
+SET DEFINE OFF;
+Insert into HUSAR10.PONUKANA_SLUZBA (ID_CENTRA,ID_ZAMESTNANCA,NAZOV,POPIS,EAN_KOD) values ('987654',null,'Wellness','celodenny vstup do wellness','987461');
+Insert into HUSAR10.PONUKANA_SLUZBA (ID_CENTRA,ID_ZAMESTNANCA,NAZOV,POPIS,EAN_KOD) values ('124567',null,'Wellness','hodinovy vstup do wellness','124987');
+Insert into HUSAR10.PONUKANA_SLUZBA (ID_CENTRA,ID_ZAMESTNANCA,NAZOV,POPIS,EAN_KOD) values ('454685','8437HZE','Zumba','zumba pre každého','454841');
+Insert into HUSAR10.PONUKANA_SLUZBA (ID_CENTRA,ID_ZAMESTNANCA,NAZOV,POPIS,EAN_KOD) values ('454685','92837HG','Aerobik','hodinovy aerobik s trenerom','454824');
+Insert into HUSAR10.PONUKANA_SLUZBA (ID_CENTRA,ID_ZAMESTNANCA,NAZOV,POPIS,EAN_KOD) values ('484304',null,'Hodinovy vstup','vstup pre cvièenie so strojmi','484684');
+Insert into HUSAR10.PONUKANA_SLUZBA (ID_CENTRA,ID_ZAMESTNANCA,NAZOV,POPIS,EAN_KOD) values ('123456',null,'Wellness','hodinovy wellness','123456');
+Insert into HUSAR10.PONUKANA_SLUZBA (ID_CENTRA,ID_ZAMESTNANCA,NAZOV,POPIS,EAN_KOD) values ('484304',null,'Predaj doplnkov','balicek doplkov pre rast svalov','484688');
+REM INSERTING into HUSAR10.PRISLUSENSTVO
+SET DEFINE OFF;
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('647382','520','S',to_date('03.06.19','DD.MM.RR'),to_date('01.07.19','DD.MM.RR'),'123456');
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('738421','85','N',to_date('20.04.20','DD.MM.RR'),to_date('27.04.20','DD.MM.RR'),'123456');
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('647583','350','S',to_date('01.12.19','DD.MM.RR'),to_date('15.12.19','DD.MM.RR'),'123456');
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('949582','90','N',to_date('15.03.23','DD.MM.RR'),null,'124567');
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('432516','190','S',to_date('04.04.21','DD.MM.RR'),to_date('01.05.21','DD.MM.RR'),'124567');
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('543210','240','S',to_date('14.06.20','DD.MM.RR'),to_date('30.08.20','DD.MM.RR'),'987654');
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('873664','40','N',to_date('13.03.22','DD.MM.RR'),to_date('20.03.22','DD.MM.RR'),'454685');
+Insert into HUSAR10.PRISLUSENSTVO (EVID_CISLO,HODNOTA,TYP,DATUM_ZAOBSTARANIE,DATUM_PREVADZKA,ID_CENTRA) values ('657098','35','N',to_date('02.02.22','DD.MM.RR'),to_date('05.02.22','DD.MM.RR'),'484304');
+REM INSERTING into HUSAR10.TERMIN
+SET DEFINE OFF;
+Insert into HUSAR10.TERMIN (ID_CENTRA,ID_ZAKAZNIKA,DATUM_TERMINU,NAZOV) values ('123456','78EWE78',to_date('09.08.22','DD.MM.RR'),'Wellness');
+Insert into HUSAR10.TERMIN (ID_CENTRA,ID_ZAKAZNIKA,DATUM_TERMINU,NAZOV) values ('123456','9843HH9',to_date('05.07.22','DD.MM.RR'),'Wellness');
+Insert into HUSAR10.TERMIN (ID_CENTRA,ID_ZAKAZNIKA,DATUM_TERMINU,NAZOV) values ('454685','IZC89WE',to_date('14.01.23','DD.MM.RR'),'Aerobik');
+Insert into HUSAR10.TERMIN (ID_CENTRA,ID_ZAKAZNIKA,DATUM_TERMINU,NAZOV) values ('454685','IZC89WE',to_date('07.04.22','DD.MM.RR'),'Zumba');
+Insert into HUSAR10.TERMIN (ID_CENTRA,ID_ZAKAZNIKA,DATUM_TERMINU,NAZOV) values ('454685','IZC89WE',to_date('07.05.22','DD.MM.RR'),'Zumba');
+Insert into HUSAR10.TERMIN (ID_CENTRA,ID_ZAKAZNIKA,DATUM_TERMINU,NAZOV) values ('987654','FHD9833',to_date('04.03.22','DD.MM.RR'),'Wellness');
+REM INSERTING into HUSAR10.ZAKAZNIK
+SET DEFINE OFF;
+Insert into HUSAR10.ZAKAZNIK (ROD_CISLO,ID_ZAKAZNIKA,DATUM_REG,DATUM_EXP,ID_CENTRA) values ('690323/6745','78EWE78',to_date('30.12.21','DD.MM.RR'),to_date('30.12.26','DD.MM.RR'),'123456');
+Insert into HUSAR10.ZAKAZNIK (ROD_CISLO,ID_ZAKAZNIKA,DATUM_REG,DATUM_EXP,ID_CENTRA) values ('881222/8239','9843HH9',to_date('22.08.20','DD.MM.RR'),to_date('22.08.25','DD.MM.RR'),'123456');
+Insert into HUSAR10.ZAKAZNIK (ROD_CISLO,ID_ZAKAZNIKA,DATUM_REG,DATUM_EXP,ID_CENTRA) values ('995610/8742','IZC89WE',to_date('15.04.20','DD.MM.RR'),to_date('15.04.25','DD.MM.RR'),'454685');
+Insert into HUSAR10.ZAKAZNIK (ROD_CISLO,ID_ZAKAZNIKA,DATUM_REG,DATUM_EXP,ID_CENTRA) values ('020330/7264','FHD9833',to_date('04.06.18','DD.MM.RR'),to_date('04.06.23','DD.MM.RR'),'987654');
+Insert into HUSAR10.ZAKAZNIK (ROD_CISLO,ID_ZAKAZNIKA,DATUM_REG,DATUM_EXP,ID_CENTRA) values ('690323/6745','86EE489',to_date('30.12.22','DD.MM.RR'),to_date('30.12.27','DD.MM.RR'),'454685');
+REM INSERTING into HUSAR10.ZAMESTNANEC
+SET DEFINE OFF;
+Insert into HUSAR10.ZAMESTNANEC (ROD_CISLO,ID_ZAMESTNANCA,DATUM_NASTUP,POZICIA,ID_CENTRA) values ('950412/9734','8437HZE',to_date('15.03.22','DD.MM.RR'),'tréner','454685');
+Insert into HUSAR10.ZAMESTNANEC (ROD_CISLO,ID_ZAMESTNANCA,DATUM_NASTUP,POZICIA,ID_CENTRA) values ('985702/7234','92837HG',to_date('01.05.19','DD.MM.RR'),'tréner','454685');
+Insert into HUSAR10.ZAMESTNANEC (ROD_CISLO,ID_ZAMESTNANCA,DATUM_NASTUP,POZICIA,ID_CENTRA) values ('015102/7633','Z8H8S83',to_date('01.06.18','DD.MM.RR'),'údržbár','987654');
+Insert into HUSAR10.ZAMESTNANEC (ROD_CISLO,ID_ZAMESTNANCA,DATUM_NASTUP,POZICIA,ID_CENTRA) values ('990922/3232','982L982',to_date('20.08.20','DD.MM.RR'),'obsluha za barom','484304');
+--------------------------------------------------------
+--  DDL for Index XPKFITNESS_CENTRUM
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKFITNESS_CENTRUM" ON "HUSAR10"."FITNESS_CENTRUM" ("ID_CENTRA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKOPRAVA
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKOPRAVA" ON "HUSAR10"."OPRAVA" ("NAHLASENIE", "EVID_CISLO", "ID_CENTRA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKOS_UDAJE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKOS_UDAJE" ON "HUSAR10"."OS_UDAJE_OSOBY" ("ROD_CISLO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKPONUKANA_SLUZBA
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKPONUKANA_SLUZBA" ON "HUSAR10"."PONUKANA_SLUZBA" ("NAZOV", "ID_CENTRA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKPRISLUSENSTVO
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKPRISLUSENSTVO" ON "HUSAR10"."PRISLUSENSTVO" ("EVID_CISLO", "ID_CENTRA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKTERMIN
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKTERMIN" ON "HUSAR10"."TERMIN" ("ID_CENTRA", "ID_ZAKAZNIKA", "NAZOV", "DATUM_TERMINU") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKZAKAZNIK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKZAKAZNIK" ON "HUSAR10"."ZAKAZNIK" ("ID_ZAKAZNIKA", "ID_CENTRA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKZAMESTNANEC
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKZAMESTNANEC" ON "HUSAR10"."ZAMESTNANEC" ("ID_ZAMESTNANCA", "ID_CENTRA") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Index XPKZLAVA
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "HUSAR10"."XPKZLAVA" ON "HUSAR10"."CENA" ("EAN_KOD") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022" ;
+--------------------------------------------------------
+--  DDL for Trigger CASOVA_NASLEDNOST_OPRAVA
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "HUSAR10"."CASOVA_NASLEDNOST_OPRAVA" 
+BEFORE UPDATE OR INSERT on oprava
+FOR EACH ROW
+BEGIN
+    IF :new.zaciatok is not null and :new.zaciatok < :new.nahlasenie THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Zaèiatok opravy musí by neskorší dátum ako dátum nahlásenia');
+    ELSIF :new.koniec is not null and :new.koniec < :new.zaciatok THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Koniec opravy musí by neskorší dátum ako dátum zaèiatku');
+    END IF;    
+END;
+
+/
+ALTER TRIGGER "HUSAR10"."CASOVA_NASLEDNOST_OPRAVA" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger INFORMACIE_O_ZMENE_CENY
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "HUSAR10"."INFORMACIE_O_ZMENE_CENY" 
+BEFORE UPDATE OR INSERT on cena
+FOR EACH ROW
+BEGIN
+    :new.datum_zmeny := SYSDATE;
+    :new.pouzivatel := user;
+END;
+
+/
+ALTER TRIGGER "HUSAR10"."INFORMACIE_O_ZMENE_CENY" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PRISLUSENSTVO_EXISTUJE_LEN_STROJ_A_NARADIE
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "HUSAR10"."PRISLUSENSTVO_EXISTUJE_LEN_STROJ_A_NARADIE" 
+BEFORE INSERT on prislusenstvo
+FOR EACH ROW
+BEGIN 
+    if :new.typ NOT IN ('S','N') then
+    RAISE_APPLICATION_ERROR(-20000,'Tento typ prislusenstva neexistuje!');
+    end if;
+END;
+
+/
+ALTER TRIGGER "HUSAR10"."PRISLUSENSTVO_EXISTUJE_LEN_STROJ_A_NARADIE" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger REGISTROVANIE_OPRAVY_NARADIA
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "HUSAR10"."REGISTROVANIE_OPRAVY_NARADIA" 
+BEFORE INSERT on oprava
+FOR EACH ROW
+BEGIN
+    :new.zaciatok := NULL;
+    :new.koniec := NULL;
+END;
+
+/
+ALTER TRIGGER "HUSAR10"."REGISTROVANIE_OPRAVY_NARADIA" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger RODNE_PRIEZVISKO_LEN_ZENAM
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "HUSAR10"."RODNE_PRIEZVISKO_LEN_ZENAM" 
+BEFORE INSERT OR UPDATE on os_udaje_osoby
+FOR EACH ROW
+BEGIN
+    if SUBSTR(:new.rod_cislo,3,1) < 5 then
+        :new.rodne_priezvisko := NULL;
+    end if;
+END;
+
+/
+ALTER TRIGGER "HUSAR10"."RODNE_PRIEZVISKO_LEN_ZENAM" ENABLE;
+--------------------------------------------------------
+--  DDL for Procedure ASPON_DVE_SLUZBY_NAVSTIVENE_V_CENTRE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."ASPON_DVE_SLUZBY_NAVSTIVENE_V_CENTRE" (
+centrum IN VARCHAR2)
+IS
+cursor navstivene_sluzby IS 
+select id_zakaznika from termin
+WHERE centrum = id_centra 
+GROUP BY id_zakaznika
+HAVING count(nazov) > 2;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Predmety aktualne poskodene v danom centre: ');
+        FOR riadok IN navstivene_sluzby LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.id_zakaznika);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure DLHA_OPRAVA_PREDMETOV_V_CENTRE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."DLHA_OPRAVA_PREDMETOV_V_CENTRE" (
+centrum IN VARCHAR2)
+IS
+cursor poskodene_predmety IS 
+select evid_cislo from oprava
+WHERE koniec IS NOT NULL 
+AND id_centra = centrum
+AND koniec - zaciatok > 14;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Predmety aktualne poskodene v danom centre: ');
+        FOR riadok IN poskodene_predmety LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.evid_cislo);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure LACNE_SLUZBY_V_CENTRE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."LACNE_SLUZBY_V_CENTRE" (
+centrum IN VARCHAR2)
+IS
+cursor lacne_sluzby IS 
+select nazov from ponukana_sluzba
+JOIN cena using (ean_kod)
+WHERE cena < 30
+AND id_centra = centrum;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Predmety aktualne poskodene v danom centre: ');
+        FOR riadok IN lacne_sluzby LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.nazov);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure NAJCASTEJSIE_NAVSTEVOVANE_CENTRUM
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."NAJCASTEJSIE_NAVSTEVOVANE_CENTRUM" (
+datum_od IN DATE,
+datum_do IN DATE)
+IS
+id_navstevovaneho_centra VARCHAR(10);
+BEGIN
+select id_centra INTO id_navstevovaneho_centra from termin
+where datum_terminu <= datum_do
+AND datum_terminu >= datum_od
+group by id_centra
+having count(id_centra) in (select max(count(id_centra)) from termin
+group by id_centra);
+DBMS_OUTPUT.PUT_LINE(id_navstevovaneho_centra);
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure ODSTRANENIE_ZAKAZNIKA_Z_FITKA
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."ODSTRANENIE_ZAKAZNIKA_Z_FITKA" (
+zakaznik in char,
+fitko in char)
+AS
+BEGIN
+    DELETE FROM termin 
+    where id_zakaznika = zakaznik and id_centra = fitko;
+    DELETE FROM zakaznik
+    where 
+    id_zakaznika = zakaznik and id_centra = fitko;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure POCETNOST_CENTRA
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."POCETNOST_CENTRA" (
+centrum IN VARCHAR2,
+den IN NUMBER
+)
+IS
+cursor pocet_terminov IS 
+select count(*) pocet from termin
+WHERE centrum = id_centra
+AND den = EXTRACT(DAY FROM datum_terminu);
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Pocet terminov v dni ' || den || ' : ');
+        FOR riadok IN pocet_terminov LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.pocet);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure POSKODENE_PRISTROJE_V_CENTRE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."POSKODENE_PRISTROJE_V_CENTRE" (
+centrum IN VARCHAR2)
+IS
+cursor poskodene_predmety IS 
+select evid_cislo from oprava
+WHERE koniec IS NULL 
+AND id_centra = centrum;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Predmety aktualne poskodene v danom centre: ');
+        FOR riadok IN poskodene_predmety LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.evid_cislo);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure POSKODENE_PRISTROJE_ZA_OBDOBIE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."POSKODENE_PRISTROJE_ZA_OBDOBIE" (
+centrum IN VARCHAR2,
+datum_od IN DATE,
+datum_do IN DATE)
+IS
+cursor poskodene_predmety IS 
+select evid_cislo from oprava
+WHERE koniec IS NOT NULL 
+AND nahlasenie >= datum_od
+AND koniec <= datum_do
+AND id_centra = centrum;
+BEGIN
+DBMS_OUTPUT.PUT_LINE('Predmety poskodene v danom casovom intervale: ');
+        FOR riadok IN poskodene_predmety LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.evid_cislo);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure VYPIS_CENTRA_V_OKRESE
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."VYPIS_CENTRA_V_OKRESE" (
+  okres_vstup IN VARCHAR2
+)
+IS
+  nazov_vystup VARCHAR2(100);
+  CURSOR centra_cursor IS
+    SELECT nazov FROM fitness_centrum WHERE okres = okres_vstup;
+BEGIN
+  DBMS_OUTPUT.PUT_LINE('V okrese sa nachadzaju: ');
+
+  FOR riadok IN centra_cursor LOOP
+    DBMS_OUTPUT.PUT_LINE(riadok.nazov);
+  END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure VYPIS_POUZIVATELOV_SLUZBY
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."VYPIS_POUZIVATELOV_SLUZBY" (
+druh_sluzby IN VARCHAR2,
+datum_od IN DATE,
+datum_do IN DATE
+)
+IS 
+ id_zakaznika_vystup VARCHAR2(10);
+ CURSOR sluzby_cursor IS
+    SELECT id_zakaznika FROM termin
+    WHERE nazov = druh_sluzby
+    AND datum_terminu >= datum_od
+    AND datum_terminu <= datum_do;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('V danom casovo rozmedzi pouzili sluzbu tito zakaznici: ');
+        FOR riadok IN sluzby_cursor LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.id_zakaznika);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure VYPIS_ZAKAZNIKOV_KTORI_NEPOUZILI
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."VYPIS_ZAKAZNIKOV_KTORI_NEPOUZILI" (
+nazov_sluzby IN VARCHAR2,
+nazov_centra IN VARCHAR2)
+IS
+CURSOR nepouzite_sluzby IS
+SELECT id_zakaznika FROM zakaznik
+JOIN fitness_centrum using (id_centra)
+WHERE nazov = nazov_centra
+AND id_zakaznika NOT IN (SELECT id_zakaznika FROM termin);
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Danu sluzbu v danom centre nepouzili: ');
+        FOR riadok IN nepouzite_sluzby LOOP
+            DBMS_OUTPUT.PUT_LINE(riadok.id_zakaznika);
+        END LOOP;
+END;
+
+/
+--------------------------------------------------------
+--  DDL for Procedure VYSKLADAJ_SKUPINU
+--------------------------------------------------------
+set define off;
+
+  CREATE OR REPLACE EDITIONABLE PROCEDURE "HUSAR10"."VYSKLADAJ_SKUPINU" (
+pracovisko IN VARCHAR2,
+odbor IN NUMBER,
+zameranie IN NUMBER,
+rocnik IN NUMBER,
+kruzok IN VARCHAR2,
+st_skupina OUT VARCHAR2 
+)
+IS 
+    znak VARCHAR2(1);
+BEGIN
+    SELECT distinct SUBSTR(popis_odboru,1,1) INTO znak from st_odbory
+    WHERE st_odbor = odbor; 
+
+    st_skupina := 5 || pracovisko || znak || zameranie || rocnik || kruzok; 
+END;
+
+/
+--------------------------------------------------------
+--  Constraints for Table CENA
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."CENA" MODIFY ("EAN_KOD" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."CENA" MODIFY ("CENA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."CENA" ADD CONSTRAINT "XPKZLAVA" PRIMARY KEY ("EAN_KOD")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table FITNESS_CENTRUM
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."FITNESS_CENTRUM" MODIFY ("NAZOV" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."FITNESS_CENTRUM" MODIFY ("OKRES" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."FITNESS_CENTRUM" MODIFY ("OBEC" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."FITNESS_CENTRUM" MODIFY ("CISLO" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."FITNESS_CENTRUM" MODIFY ("ID_CENTRA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."FITNESS_CENTRUM" ADD CONSTRAINT "XPKFITNESS_CENTRUM" PRIMARY KEY ("ID_CENTRA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table OPRAVA
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."OPRAVA" MODIFY ("EVID_CISLO" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OPRAVA" MODIFY ("NAHLASENIE" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OPRAVA" MODIFY ("TYP_CHYBY" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OPRAVA" MODIFY ("ID_CENTRA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OPRAVA" ADD CONSTRAINT "XPKOPRAVA" PRIMARY KEY ("NAHLASENIE", "EVID_CISLO", "ID_CENTRA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table OS_UDAJE_OSOBY
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."OS_UDAJE_OSOBY" MODIFY ("ROD_CISLO" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OS_UDAJE_OSOBY" MODIFY ("MENO" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OS_UDAJE_OSOBY" MODIFY ("PRIEZVISKO" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OS_UDAJE_OSOBY" MODIFY ("OBEC" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OS_UDAJE_OSOBY" MODIFY ("CISLO" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."OS_UDAJE_OSOBY" ADD CONSTRAINT "XPKOS_UDAJE" PRIMARY KEY ("ROD_CISLO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PONUKANA_SLUZBA
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."PONUKANA_SLUZBA" MODIFY ("ID_CENTRA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."PONUKANA_SLUZBA" MODIFY ("NAZOV" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."PONUKANA_SLUZBA" MODIFY ("EAN_KOD" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."PONUKANA_SLUZBA" ADD CONSTRAINT "XPKPONUKANA_SLUZBA" PRIMARY KEY ("NAZOV", "ID_CENTRA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table PRISLUSENSTVO
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."PRISLUSENSTVO" MODIFY ("EVID_CISLO" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."PRISLUSENSTVO" MODIFY ("TYP" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."PRISLUSENSTVO" MODIFY ("DATUM_ZAOBSTARANIE" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."PRISLUSENSTVO" MODIFY ("ID_CENTRA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."PRISLUSENSTVO" ADD CONSTRAINT "XPKPRISLUSENSTVO" PRIMARY KEY ("EVID_CISLO", "ID_CENTRA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table TERMIN
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."TERMIN" MODIFY ("ID_CENTRA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."TERMIN" MODIFY ("ID_ZAKAZNIKA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."TERMIN" MODIFY ("DATUM_TERMINU" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."TERMIN" MODIFY ("NAZOV" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."TERMIN" ADD CONSTRAINT "XPKTERMIN" PRIMARY KEY ("ID_CENTRA", "ID_ZAKAZNIKA", "NAZOV", "DATUM_TERMINU")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ZAKAZNIK
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."ZAKAZNIK" MODIFY ("ID_ZAKAZNIKA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."ZAKAZNIK" MODIFY ("DATUM_REG" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."ZAKAZNIK" MODIFY ("ID_CENTRA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."ZAKAZNIK" ADD CONSTRAINT "XPKZAKAZNIK" PRIMARY KEY ("ID_ZAKAZNIKA", "ID_CENTRA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table ZAMESTNANEC
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."ZAMESTNANEC" MODIFY ("ID_ZAMESTNANCA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."ZAMESTNANEC" MODIFY ("DATUM_NASTUP" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."ZAMESTNANEC" MODIFY ("POZICIA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."ZAMESTNANEC" MODIFY ("ID_CENTRA" NOT NULL ENABLE);
+  ALTER TABLE "HUSAR10"."ZAMESTNANEC" ADD CONSTRAINT "XPKZAMESTNANEC" PRIMARY KEY ("ID_ZAMESTNANCA", "ID_CENTRA")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "STUDENTI_DBS_2022"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table OPRAVA
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."OPRAVA" ADD CONSTRAINT "R_11" FOREIGN KEY ("EVID_CISLO", "ID_CENTRA")
+	  REFERENCES "HUSAR10"."PRISLUSENSTVO" ("EVID_CISLO", "ID_CENTRA") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PONUKANA_SLUZBA
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."PONUKANA_SLUZBA" ADD CONSTRAINT "R_13" FOREIGN KEY ("ID_CENTRA")
+	  REFERENCES "HUSAR10"."FITNESS_CENTRUM" ("ID_CENTRA") ENABLE;
+  ALTER TABLE "HUSAR10"."PONUKANA_SLUZBA" ADD CONSTRAINT "R_14" FOREIGN KEY ("ID_ZAMESTNANCA", "ID_CENTRA")
+	  REFERENCES "HUSAR10"."ZAMESTNANEC" ("ID_ZAMESTNANCA", "ID_CENTRA") ON DELETE SET NULL ENABLE;
+  ALTER TABLE "HUSAR10"."PONUKANA_SLUZBA" ADD CONSTRAINT "R_26" FOREIGN KEY ("EAN_KOD")
+	  REFERENCES "HUSAR10"."CENA" ("EAN_KOD") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table PRISLUSENSTVO
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."PRISLUSENSTVO" ADD CONSTRAINT "R_20" FOREIGN KEY ("ID_CENTRA")
+	  REFERENCES "HUSAR10"."FITNESS_CENTRUM" ("ID_CENTRA") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table TERMIN
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."TERMIN" ADD CONSTRAINT "R_16" FOREIGN KEY ("NAZOV", "ID_CENTRA")
+	  REFERENCES "HUSAR10"."PONUKANA_SLUZBA" ("NAZOV", "ID_CENTRA") ENABLE;
+  ALTER TABLE "HUSAR10"."TERMIN" ADD CONSTRAINT "R_18" FOREIGN KEY ("ID_ZAKAZNIKA", "ID_CENTRA")
+	  REFERENCES "HUSAR10"."ZAKAZNIK" ("ID_ZAKAZNIKA", "ID_CENTRA") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ZAKAZNIK
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."ZAKAZNIK" ADD CONSTRAINT "R_19" FOREIGN KEY ("ID_CENTRA")
+	  REFERENCES "HUSAR10"."FITNESS_CENTRUM" ("ID_CENTRA") ENABLE;
+  ALTER TABLE "HUSAR10"."ZAKAZNIK" ADD CONSTRAINT "R_2" FOREIGN KEY ("ROD_CISLO")
+	  REFERENCES "HUSAR10"."OS_UDAJE_OSOBY" ("ROD_CISLO") ON DELETE SET NULL ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table ZAMESTNANEC
+--------------------------------------------------------
+
+  ALTER TABLE "HUSAR10"."ZAMESTNANEC" ADD CONSTRAINT "R_3" FOREIGN KEY ("ROD_CISLO")
+	  REFERENCES "HUSAR10"."OS_UDAJE_OSOBY" ("ROD_CISLO") ON DELETE SET NULL ENABLE;
+  ALTER TABLE "HUSAR10"."ZAMESTNANEC" ADD CONSTRAINT "R_9" FOREIGN KEY ("ID_CENTRA")
+	  REFERENCES "HUSAR10"."FITNESS_CENTRUM" ("ID_CENTRA") ENABLE;

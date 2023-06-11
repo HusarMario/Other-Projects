@@ -1,0 +1,50 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data
+Array DD 1.0, 2.1, 3.2, 4.3, 5.4
+ArraySize DD lengthof Array
+
+.code
+main PROC
+	call Clrscr
+	finit
+
+	xor EDI, EDI
+	mov ECX, ArraySize
+	fldz
+
+	LoopExpectedValue:
+		fld Array[4*EDI]
+		fadd
+
+		inc EDI
+		loop LoopExpectedValue
+	
+	fild ArraySize
+	fdiv
+	call WriteFloat
+
+	xor EDI, EDI
+	mov ECX, ArraySize
+	fldz
+
+	LoopStandardDeviation:
+		fld Array[4*EDI]
+		fsub st(0), st(2)
+		fmul st(0), st(0)
+		fadd
+
+		inc EDI
+		loop LoopStandardDeviation
+
+	fild ArraySize
+	fdiv
+	fsqrt
+	call Crlf
+	call WriteFloat
+
+	exit
+main ENDP
+
+END main

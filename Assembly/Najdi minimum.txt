@@ -1,0 +1,100 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+FindMin PROTO, paInputArrayOffset:DWord, paArrayLength:DWord, paOutputIndexOffset:DWord
+
+.data
+Array DW 7 dup(?); pole wordov, v ktorom bude procedura hladat najmensi prvok
+ArrayLength EQU lengthof Array; pocet wordov pola cez operator/direktivu lengthof
+; nejake spravy, nech je lepsia user experience
+; v ArrayLength je pocet prvkov, ked ho pricitame k znaku '0' - dostaneme znak predstavujuci pocet prvkov (vid ASCII tab.)
+WelcomeMessage DB "Zadaj postupne ", ArrayLength + '0', " prvkov:",0
+MinIndexMessage DB "Index najmensieho prvku: ", 0
+MinValueMessage DB "Hodnota najmensieho prvku: ", 0
+MinIndex DD -1; sem procedura nastavi index najmensieho prvku, predame jej offset tejto premennej
+
+.code
+main PROC
+	; 1. Definujte v pamati postupnost cisiel typu word.
+	; Vypiste najmensie cislo a jeho poradie v postupnosti.
+	;
+	; 2. Nacitajte postupnost cisiel typu word.
+	; Vypiste najmensie cislo a jeho poradie v postupnosti.
+
+	; vypis instrukcnej spravy
+	mov EDX, offset WelcomeMessage
+	call WriteString
+	; procedura vypise enter - vypluje 2 znaky: Carriage return (0Dh) a Line feeed (0Ah)
+	call Crlf
+
+	; nacitanie vstupneho pola
+	mov ECX, ArrayLength; nacitame tolko wordov, ake je velke pole wordov
+	xor ESI, ESI
+	ReadInput:
+		call ReadInt
+		mov Array[2 * ESI], AX; krokujeme po dvoch bajtoch lebo mame pole wordov, berieme hodnotu AX
+		inc ESI
+		loop ReadInput
+
+	; procedura najde najmensi prvok
+	; predavame teda offset pola wordov, pocet jeho prvkov a offset premennej, kde hodi INDEX min. prvku
+	invoke FindMin, offset Array, ArrayLength, offset MinIndex
+
+	call Crlf; enter, kvoli estetike
+	
+	; vypis najmensej hodnoty
+	; popisny retazec
+	mov EDX, offset MinValueMessage
+	call WriteString
+	; najmensia hodnota
+	mov ESI, MinIndex
+	; nacitavame 2 bajty do 4 bajtov (nekompatibilita operandov), pretoze WriteInt pracuje s celym EAX
+	; treba mov with zero extension (v hornych 2 bajtoch nastavi 0)
+	movzx EAX, Array[2 * ESI]
+	call WriteInt
+
+	call Crlf; opat enter
+
+	; vypis najmensieho indexu
+	; popisna sprava
+	mov EDX, offset MinIndexMessage
+	call WriteString
+	; index najmensieho wordu
+	mov EAX, MinIndex
+	call WriteInt
+
+	call Crlf; a nakoniec este jeden maly enter
+
+	exit
+main ENDP
+
+FindMin PROC USES EAX EBX ECX EDX ESI EDI paInputArrayOffset:DWord, paArrayLength:DWord, paOutputIndexOffset:DWord
+	mov EBX, paInputArrayOffset; offset zaciatku pola wordov
+	mov ECX, paArrayLength; pocet wordov - tolkotokrat loopujeme, aby sme presli kazdy prvok
+	xor ESI, ESI; indexy postupne prechadzanych prvkov (0 az paArrayLength - 1)
+	
+	; na zaciatku prehlasime za najmensi prvy prvok (s indexom 0)
+	; cyklovat teda budeme od druheho (s indexom 1) po posledny (s indexom paArrayLength - 1)
+	; ak prvy prvok nie je najmensi, pri cykleni to zistime a spravny prehlasime za najmensi
+	xor EDI, EDI; index doposial najmensieho prvku - na zaciatku nulty index
+	mov DX, [EBX]; doteraz najnizsia najdena hodnota - na zaciatku prvy prvok (s indexom 0)
+	inc ESI; porovnavame teda uz od druheho prvku (s indexom 1)
+	dec ECX; cyklus teda ide o jeden prechod menej (prvy word sme uz osetrili)
+
+	Compare:
+		mov AX, [EBX + 2 * ESI]; v AX je postupne kazdy word pola
+		cmp AX, DX; je aktualny word mensi nez doterajsi najmensi?
+		jae NumberNotSmaller; teda skoc ak je aktualny word >= nez doterajsi najmensi
+		mov EDI, ESI; ak sme nasli mensi prvok, neskocili sme - updatujeme index najmensieho wordu
+		mov DX, AX; hodnota noveho najmensieho wordu - cachujeme ju - nemusime ju stale vyhladavat cez index v poli
+		NumberNotSmaller:
+		inc ESI; pri dalsom prechode cyklu ideme na dalsi word
+		loop Compare
+		
+	; po skonceni mame v EDI index najmensieho prvku, ten ulozime na offset predany v parametri
+	mov EBX, paOutputIndexOffset
+	mov [EBX], EDI
+	ret
+FindMin ENDP
+
+END main

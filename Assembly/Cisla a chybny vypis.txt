@@ -1,0 +1,79 @@
+TITLE MASM Template	(main.asm)
+
+INCLUDE Irvine32.inc
+.data
+errorMessage DB "Invalid input", 0
+isNegative DB 0
+
+.code
+main PROC
+	call Clrscr
+
+	xor BX, BX					; vynuluje BX (aktuálne číslo)
+	mov ECX, 5					; do ECX nastaví 5 (počet opakovaní cyklu)
+
+	InputLoop:
+		call ReadChar				; načíta znak do AL
+		call WriteChar				; následne načítaný znak vypíše (feedback)
+
+		cmp ECX, 5				; porovná, či sa cyklus nachádza na prvej iterácií
+		je CheckSign				; ak je cyklus na prvej iterácií, zisti či nebolo zadané '-'
+
+		Continue:
+			cmp AL, 0Dh				; porovná AL (načítaný znak) so znakom enter
+			je WriteResult			; ak bol stlačený enter, cyklus predčasne skončí
+
+			cmp AL, '0'			; porovná AL (načítaný znak) so znakom '0'
+			jb InputError			; ak je zadaný znak menší ako 0 v ASCII tabuľke, chyba vstupu
+
+			cmp AL, '9'			; porovná AL (načítaný znak) so znakom '0'
+			ja InputError			; ak je zadaný znak väčší ako 9 v ASCII tabuľke, chyba vstupu
+
+			and AL, 0Fh			; ASCII hodnotnu načítaného znaku prevedie na číslo
+
+			imul BX, 10			; vynásobí BX (aktuálne číslo) *10
+			mov AH, 0			; vynuluje AH (ReadChar mení aj AH)
+			add BX, AX			; ku BX pridá AX (hodnotu načítaného čísla)
+
+			loop InputLoop			; ďalšia iterácia cyklu
+
+	WriteResult:
+		cmp isNegative, 1			; porovná príznak, či bolo zadané mínus
+		je MakeComplement			; ak bolo zadané mínus, urobí B2-komplement
+
+		Write:
+			mov AL, 0Ah			; do AL uloží znak nového riadku
+			call WriteChar			; vypíše znak z AL (nový riadok)
+
+			movsx EAX, BX			; do EAX dá hodnotu z BX pri zachovaní znamienka
+			call WriteInt			; vypíše číslo z EAX
+			jmp ProgramEnd			; skočí na koniec
+
+	MakeComplement:
+		neg BX					; neg urobí B2-komplement
+		jmp Write				; skočí na návestie Write
+
+	CheckSign:
+		cmp isNegative, 1			; ak mínus už bolo zadané
+		je Continue				; pokračuje
+
+		cmp AL, '-'				; porovná načítaný znak s '-'
+		jne Continue				; ak nebolo zadané mínus, program pokračuje
+
+		mov isNegative, 1			; nastaví sa prízak isNegative na 1
+		jmp InputLoop				; ide sa ďalšiu iteráciu cyklu (index ECX sa nemení)
+
+	InputError:
+		mov AL, 0Ah				; do AL uloží znak nového riadku
+		call WriteChar				; vypíše znak z AL (nový riadok)
+
+		lea EDX, errorMessage			; do EDX uloží adresu erroMessage
+		call WriteString			; vypíše znak z EDX
+		jmp ProgramEnd				; skočí na koniec
+
+	ProgramEnd:
+		exit					; skončí program
+
+main ENDP
+
+END main

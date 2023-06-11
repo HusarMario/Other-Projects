@@ -1,0 +1,94 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+IntToString PROTO paResult:DWORD
+
+.data
+result DB 10 dup(0)
+
+.code
+main PROC
+	call Clrscr
+	
+	mov EDX, OFFSET result
+	mov AX, -123
+
+	INVOKE IntToString, EDX
+	call WriteString
+
+	exit
+main ENDP
+
+IntToString PROC uses EAX EBX ECX EDX ESI paResult
+	LOCAL divideBy:WORD
+	LOCAL isNegative:BYTE
+
+	mov divideBy, 10
+	mov isNegative, 0
+
+	xor DX, DX
+	mov EBX, paResult
+	xor ECX, ECX
+
+	test AX, 0FFFFh
+	js IsNegativeStart
+
+	LoopInput:
+		idiv divideBy
+
+		cmp isNegative, 1
+		je IsNegativeLoop
+		
+		LoopInputContinue:
+			OR DX, 30h
+
+			push DX
+			xor DX, DX
+			inc ECX
+			
+			cmp isNegative, 1
+			je IsNegativeSetDX
+
+			LoopInputEnd:
+				cmp AX, 0
+				jnz LoopInput
+				jmp WriteResult
+
+	IsNegativeStart:
+		mov isNegative, 1
+		or DX, 0FFFFh
+		jmp LoopInput
+
+	IsNegativeLoop:
+		neg DX
+		jmp LoopInputContinue
+
+	IsNegativeSetDX:
+		or DX, 0FFFFh
+		jmp LoopInputEnd
+
+	WriteResult:
+		xor ESI, ESI
+		
+		cmp isNegative, 1
+		je IsNegativeWriteResult
+		
+		WriteResultLoop:
+			pop DX
+			mov byte ptr[EBX + ESI], DL
+			inc ESI
+			Loop WriteResultLoop
+			jmp EndFunction
+
+	IsNegativeWriteResult:
+		mov DX, '-'
+		push DX
+		inc ECX
+		jmp WriteResultLoop
+
+	EndFunction:
+		mov byte ptr [EBX + ESI], 0
+		ret
+IntToString ENDP
+
+END main

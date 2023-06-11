@@ -1,0 +1,42 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data
+number DB 16 dup(0)
+divideBy DW 2
+
+.code
+main PROC
+	call Clrscr
+
+	mov AX, -123				;inputed number
+	xor DX, DX				;vynulovanie registra pre bity
+	lea EBX, number				;ulozenie adresy na ulozenie cisla
+	xor ESI, ESI				;vynulovanie registra pre zapis
+
+	LoopInput:
+		idiv divideBy			;delenie
+
+		OR DX, 30h			;?
+
+		mov [EBX + ESI], DX		;ulozenie bitu
+		inc ESI				;increment zapisu
+		xor DX, DX			;vynulovanie registra pre bity
+			
+		cmp AX, 0			;skontrolovanie konca
+		jnz LoopInput		
+
+		mov ECX, ESI			;nacita dlzku cisla
+		jmp WriteResultLoop
+
+	WriteResultLoop:
+		mov AL, [EBX + ECX - 1]
+		call WriteChar			;vypise jednotlive bity
+		Loop WriteResultLoop
+		jmp EndProgram
+	
+	EndProgram:
+		exit
+main ENDP
+
+END main

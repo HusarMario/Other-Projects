@@ -1,0 +1,70 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data
+	dlzka equ 10				;dlzka slova
+	sprava DB dlzka dup(?)		;priestor na ulozenie slova
+	char byte ?					;hladane pismeno
+	pocitadlo dword ?			;pocitadlo
+
+
+.code
+main PROC
+	call Clrscr
+
+	mov edx, OFFSET sprava		;nastavenie na zaciatok miesta na ulozenie
+	mov ecx, dlzka + 1			;nastavenie konca
+	call ReadString				;precitanie stringu
+
+	call WriteString			;vypisanie celeho stringu
+	call CRLF					;new line
+
+	xor esi, esi				;vynulovanie registrov
+L1:
+	mov al,sprava[esi]			;pismenko do registra
+	call WriteChar				;vypisanie pismenka
+	call CRLF					;new line
+	inc esi						;inc pocitadlo
+
+	cmp AL,0					;zistenie konca slova
+	jne L1						;skok nazad
+
+
+	xor esi, esi				;vynulovanie registrov
+L2:
+	mov al,sprava[esi]			;pismenko do registra
+	cmp AL,0
+	je L22
+	call WriteChar				;vypisanie pismenka
+	inc al						;navysenie ulozeneho znaku
+	call WriteChar				;vypisanie navyseneho znaku
+	dec al						;znizenie ulozeneho znaku
+	call CRLF					;new line
+	inc esi						;inc pocitadlo
+
+L22:
+	cmp AL,0					;zistenie konca slova
+	jne L2						;skok nazad
+	call CRLF					; new line
+
+	call Readchar
+	mov char,al
+	xor esi, esi
+	mov pocitadlo,0
+L3:
+	mov al,sprava[esi]
+	inc esi
+	cmp AL, char
+	jne L33
+	inc pocitadlo
+L33:
+	cmp Al,0
+	jne L3
+
+	mov eax, pocitadlo
+	call WriteDec
+
+	exit
+
+main ENDP
+END main

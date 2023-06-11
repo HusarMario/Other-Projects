@@ -1,0 +1,138 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+INCLUDE Macros.inc
+
+GetHighestValueInMatrix PROTO, matrixOffset:DWORD, rows:DWORD, columns:DWORD, bytesInCell:DWORD, resultDistanceOffset:DWORD, resultRowOffset:DWORD, resultColumnOffset:DWORD
+
+.data
+
+Bytca DB "Bytca", 0
+Cadca DB "Cadca", 0
+DolnyKubin DB "Dolny Kubin", 0
+KysNovMesto DB "Kysucke Nove Mesto", 0
+LipMikulas DB "Liptovsky Mikulas", 0
+Martin DB "Martin", 0
+Namestovo DB "Namestovo", 0
+Ruzomberok DB "Ruzomberok", 0
+Tvrdosin DB "Tvrdosin", 0
+TurTeplice DB "Turcianske Teplice", 0
+Zilina DB "Zilina", 0
+
+Cities DD Bytca, Cadca, DolnyKubin, KysNovMesto, LipMikulas, Martin, Namestovo, Ruzomberok, Tvrdosin, TurTeplice, Zilina
+
+DistanceMatrix DW 0,46,81,26,108,49,100,82,112,72,20
+DW 46,0,67,21,111,60,69,85,81,84,34
+DW 81,67,0,61,43,43,32,18,31,68,53
+DW 26,21,61,0,97,40,75,73,88,63,12	
+DW 108,111,43,97,0,70,69,27,55,94,88
+DW 49,60,43,40,70,0,74,44,73,24,30
+DW 100,69,32,75,69,74,0,49,14,99,79
+DW 82,85,18,73,27,44,49,0,48,68,63
+DW 112,81,31,88,55,73,14,48,0,98,92
+DW 72,84,68,63,94,24,99,68,98,0,53
+DW 20,34,53,12,88,30,79,63,92,53,0
+
+highestDistance DW 0
+resultRow DD 0
+resultColumn DD 0
+
+.code
+main PROC
+	call Clrscr
+
+	INVOKE GetHighestValueInMatrix, OFFSET DistanceMatrix, 11, 11, 2, OFFSET highestDistance, OFFSET resultRow, OFFSET resultColumn
+
+	mWrite "Najdlhsia vzdialenost je "
+	movzx EAX, highestDistance
+	call WriteInt
+
+	mWrite " km. Medzi mestami "
+	mov ESI, resultRow
+	imul ESI, 4
+	mov EDX, [Cities + ESI]
+	call WriteString
+	mWrite " a "
+
+	mov ESI, resultColumn
+	imul ESI, 4
+	mov EDX, [Cities + ESI]
+	call WriteString
+
+	call Crlf
+	call Crlf
+	mWrite "indexy miest:"
+	call Crlf
+
+	mWrite "riadok: "
+	mov EAX, resultRow
+	call WriteInt
+	call Crlf
+
+	mWrite "stlpec: "
+	mov EAX, resultColumn
+	call WriteInt
+	call Crlf
+
+	exit
+main ENDP
+
+GetHighestValueInMatrix PROC USES EBX ECX DX ESI ESI matrixOffset:DWORD, rows:DWORD, columns:DWORD, bytesInCell:DWORD, resultDistanceOffset:DWORD, resultRowOffset:DWORD, resultColumnOffset:DWORD
+	LOCAL highestFound:WORD
+
+	mov highestFound, 0
+
+	mov ECX, rows
+	xor ESI, ESI
+
+	RowsLoop:
+		push ECX
+
+		push ESI
+		imul ESI, bytesInCell
+		mov EBX, columns
+		imul EBX, ESI
+		add EBX, matrixOffset
+		pop ESI
+
+		mov ECX, columns
+		xor EDI, EDI
+		ColumnsLoop:
+			push EDI
+			imul EDI, bytesInCell
+			mov DX, word ptr[EBX + EDI]
+			pop EDI
+			cmp highestFound, DX
+			jb NewFound
+
+			ColumnsLoopContinue:
+				inc EDI
+				loop ColumnsLoop
+
+		pop ECX
+		inc ESI
+		loop RowsLoop
+		jmp EndProcedure
+
+	NewFound:
+		push EBX
+		
+		mov highestFound, DX
+
+		mov EBX, resultRowOffset
+		mov dword ptr [EBX], ESI
+		
+		mov EBX, resultColumnOffset
+		mov dword ptr [EBX], EDI
+
+		pop EBX
+		jmp ColumnsLoopContinue
+
+	EndProcedure:
+		mov EBX, resultDistanceOffset
+		mov DX, highestFound
+		mov word ptr [EBX], DX
+		ret
+GetHighestValueInMatrix ENDP
+
+END main

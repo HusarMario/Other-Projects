@@ -1,0 +1,122 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+
+ReadMatrix PROTO pMatrix:DWORD, pRows:DWORD, pCols:DWORD, pCellBytes:DWORD
+
+.data
+Matrix	DW 1, 2, -3, 4, -5
+DW 6, -7, 8, 9, 10
+DW -11, 12, 13, -14, 15
+RowLen EQU sizeof Matrix
+Rows DD 3
+Cols DD 5
+
+
+
+
+
+.code
+main PROC
+	call CLRSCR
+	finit
+
+	INVOKE ReadMatrix, OFFSET Matrix, Rows, Cols, type Matrix
+
+	call ReadInt
+
+	mov EBX, RowLen		;ulozi offset prveho riadku
+	imul EBX, EAX		;posunie na spravny riadok
+	mov ECX, Cols		;ulozi pocet stlpcov
+	xor ESI, ESI		;vynuluje pocitadlo
+	
+	ChangeSignLoop:
+		mov AX, Matrix[EBX + ESI * type Matrix]	;postupne berie cisla
+		imul AX, -1								;prevrati
+		mov Matrix[EBX + ESI * type Matrix], AX	;vrati nazad
+		inc ESI									;inc loop
+		loop ChangeSignLoop
+
+	INVOKE ReadMatrix, OFFSET Matrix, Rows, Cols, type Matrix
+
+	mov ECX, Cols		;ulozi pocet stlpcov
+	xor ESI, ESI		;vynuluje pocitadlo
+
+	ColSumLoop:
+		push ECX		;vytlaci stlpec
+		mov ECX, Rows	;ulozi pocet riadkov
+		xor DX, DX		;vynuluje DX (uchova pocet)
+		xor EDI, EDI	;vynuluje pocitadlo
+
+		ColSumLoopRow :
+			mov EBX, RowLen		;ulozi offset riadku
+			imul EBX,EDI		;posunie na spravny riadok
+
+			add DX, word ptr Matrix[EBX + ESI * type Matrix]	;pripocita hodnotu
+			inc EDI												;posun riadku
+			loop ColSumLoopRow
+
+		movsx EAX, DX	;ulozi cislo na vypis
+		call WriteInt	;vypise cislo
+		call Crlf		;medzera
+
+		pop ECX			;vrati stlpec
+		inc ESI			;inc stlpec
+		loop ColSumLoop
+
+	call Crlf
+
+	call ReadInt
+	mov ECX, Cols		;ulozi pocet stlpcov 
+	xor ESI, ESI		;pocitadlo
+
+	mov EBX, RowLen		;ulozi offset riadku
+	imul EBX, EAX		;posunie na spravny riadok
+	fldz				;dosadi 0
+
+	AverageLoop:
+		fild word ptr Matrix[EBX + ESI * type Matrix]
+		fadd			;pripocita dosadene cislo
+
+		inc ESI
+		loop AverageLoop
+
+	fild Cols			;dosadi pocet stlpcov
+	fdiv				;vydeli poctom stlpcov
+
+	call WriteFloat
+
+	exit
+main ENDP
+
+ReadMatrix PROC USES EAX EBX ECX ESI EDI pMatrix:DWORD, pRows:DWORD, pCols:DWORD, pCellBytes:DWORD
+		mov ECX, pRows			;ECX pocet riadkov
+		xor ESI, ESI			;vynulovanie ESI (index riadka)
+
+	LoopRows:
+		mov EBX, pCols			;EBX pocet stlpcov
+		imul EBX, ESI			;aktualny offset riadka
+
+		push ECX	
+		
+		add EBX, pMatrix	;EBX uchova presny offset
+
+		mov ECX, pCols			;ECX pocet stlpcov
+		xor EDI, EDI				;vynulovanie EDI(index stlpca)
+
+		LoopCols:
+			movsx EAX, word ptr[EBX+EDI]
+			call WriteInt
+			add EDI, pCellBytes
+			loop LoopCols
+
+		pop ECX
+		add ESI, pCellBytes
+
+		call Crlf
+		loop LoopRows
+	ret
+ReadMatrix ENDP
+
+
+END main

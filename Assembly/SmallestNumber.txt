@@ -1,0 +1,89 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+ReadSequence PROTO sequenceOffset:DWORD, count:DWORD
+FindSmallestNumber PROTO sequenceOffset:DWORD, numbersCount:DWORD, resultIndexOffset:DWORD
+
+.data
+numsCount EQU 10
+sequence DW numsCount dup(?)
+resultIndex DD 0
+
+resultMessageIndex DB "index: ", 0
+resultMessageValue DB "value: ", 0
+
+.code
+main PROC
+	call Clrscr
+	
+	INVOKE ReadSequence, OFFSET sequence, numsCount
+	INVOKE FindSmallestNumber, OFFSET sequence, numsCount, OFFSET resultIndex
+
+	mov EDX, OFFSET resultMessageIndex
+	call WriteString
+
+	mov EAX, resultIndex
+	call WriteInt
+
+	mov AL, 0Ah
+	call WriteChar
+
+	mov EDX, OFFSET resultMessageValue
+	call WriteString
+
+	mov ECX, resultIndex
+	movsx EAX, word ptr[sequence + 2*ECX]
+	call WriteInt
+
+	exit
+main ENDP
+
+ReadSequence PROC uses AX EBX ECX ESI sequenceOffset:DWORD, count:DWORD
+	mov EBX, sequenceOffset
+	xor ESI, ESI
+	mov ECX, count
+
+	ReadLoop:
+		call ReadInt
+		mov word ptr[EBX + 2*ESI], AX
+		inc ESI
+		loop ReadLoop
+		ret
+
+ReadSequence ENDP
+
+FindSmallestNumber PROC uses EAX EBX ECX EDX ESI sequenceOffset:DWORD, numbersCount:DWORD, resultIndexOffset:DWORD
+	LOCAL smallestFound:WORD
+	LOCAL smallestFoundIndex:DWORD
+
+	mov smallestFound, 00FFFh
+	mov smallestFoundIndex, 0
+
+	mov EBX, sequenceOffset
+	mov ECX, numbersCount
+	mov EDX, resultIndexOffset
+	xor ESI, ESI
+
+	LoopSequence:
+		mov AX, [EBX + 2*ESI]
+		cmp AX, smallestFound 
+		jl NewSmallest
+		inc ESI
+		loop LoopSequence
+		jmp WriteResult
+
+	NewSmallest:
+		mov smallestFound, AX
+		mov smallestFoundIndex, ESI
+		inc ESI
+		loop LoopSequence
+		jmp WriteResult
+
+	WriteResult:
+		mov EAX, smallestFoundIndex
+		mov dword ptr [EDX], EAX
+		ret
+
+FindSmallestNumber ENDP
+
+END main

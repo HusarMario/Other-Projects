@@ -1,0 +1,52 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data
+	dlzka equ 20			;dlzka slova
+	sprava DB dlzka dup(?)		;priestor na ulozenie slova
+	copy DB dlzka dup(?)		;priestor na prekopirovanie
+
+
+.code
+main PROC
+	call Clrscr
+
+	mov edx, OFFSET sprava		;nastavenie na zaciatok miesta na ulozenie
+	mov ecx, dlzka + 1		;nastavenie konca
+	call ReadString			;precitanie stringu
+
+	mov ebx, OFFSET sprava		;adresa na zaciatok spravy
+	mov edx, OFFSET copy		;adresa na zaciatok copy
+	xor esi, esi			;vynulovanie registra esi
+	xor edi, edi			;vynulovanie regsitra edi
+NEXT:
+	mov AL,[EBX+ESI]		;nacitavanie cez adresu
+	cmp AL,0			;porovnanie konca
+	je KONIEC			;jmp ak koniec
+	cmp AL,[EBX+ESI+1]		;porovnaie momentalneho a nasledujuceho znaku
+	je HVIEZDA			;jmp ak hviezda
+	jmp PREPIS			;jmp na prepis
+
+HVIEZDA:
+	mov AL,'*'			;vlozenie hviezdy do registra
+	mov [EDX+EDI],AL		;vlozenie na adresu
+	inc esi				;navysenie esi
+	inc esi				;navysenie esi
+	inc edi				;navysenie edi
+	jmp NEXT			;skok na next
+
+PREPIS:
+	mov [EDX+EDI],AL		;ulozenie kopirovaneho pismena
+	inc esi				;navysenie esi
+	inc edi				;navysenie edi
+	jmp NEXT			;skok na next
+
+KONIEC:
+	mov EDX, OFFSET copy		;nastavenie na zaciatok copy
+	call WriteString		;vypis copy
+
+
+	exit
+
+main ENDP
+END main

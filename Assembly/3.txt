@@ -1,0 +1,125 @@
+TITLE MASM Template						(main.asm)
+
+INCLUDE Irvine32.inc
+.data	
+
+
+Dates DD Zavod0, Zavod1, Zavod2, Zavod3, Zavod4, Zavod5, Zavod6
+Zavod0 DB "19.11.2022", 0
+Zavod1 DB "20.11.2022", 0
+Zavod2 DB "27.11.2022", 0
+Zavod3 DB "11.12.2022", 0
+Zavod4 DB "29.12.2022", 0
+Zavod5 DB "4.1.2023", 0
+Zavod6 DB "10.1.2023", 0
+
+Names DD Meno0, Meno1, Meno2, Meno3, Meno4
+Meno0 DB "Anna", 0
+Meno1 DB "Lena", 0
+Meno2 DB "Mikaela", 0
+Meno3 DB "Petra", 0
+Meno4 DB "Wendy", 0
+
+Zavody	DW 2, 0, 1, 6, 6, 3, 0
+		DW 4, 4, 28, 8, 4, 0, 4
+		DW 1, 1, 5, 2, 1, 1, 2
+		DW 3, 3, 4, 3, 4, 2, 1
+		DW 5, 2, 1, 1, 5, 4, 4
+
+Casy	DW 0,0
+		DW 56.86,55.94
+		DW 56.07,56.31
+		DW 55.9,56.05
+		DW 57.14,56.35
+
+PocMien EQU 5
+PocPretekov EQU 7
+PocCasov EQU 2
+
+nevyhralaSprava DB "Jazdkyna nevyhrala ziadny zavod", 0
+nedokoncilaSprava DB "Jazdkyna nedokoncila posledny zavod", 0
+
+HladanaOsoba DW 0;
+
+
+.code
+main PROC
+	call Clrscr
+
+	xor EAX, EAX		;uchova riadok
+	xor EBX, EBX		;uchova posledne vitazstvo
+	xor EDX, EDX		;uchova vitazstvo
+	xor ECX, ECX		;loop
+	xor ESI, ESI		;uchova pocet umiestneni
+	xor EDI, EDI		;uchova stlpec
+
+	call readInt			;nacita riadok
+	mov HladanaOsoba, AX
+	imul EAX, PocPretekov
+	imul EAX, type Zavody
+	mov ECX, PocPretekov	;nacita stlpce
+
+PrehladajLoop:
+	movzx EDX, Zavody[EAX + EDI * type Zavody];
+
+
+	cmp EDX, 0
+	jle NextLoop
+
+	cmp EDX, 3
+	jg NextLoop
+
+	inc ESI
+	mov EBX, EDI
+
+NextLoop:
+	inc EDI
+	loop PrehladajLoop
+
+	mov EAX, ESI
+	call writeDec
+	call crlf
+
+	cmp EBX, 0
+	je Nevyhrala
+
+	
+	mov EDX, Dates[EBX * type Dates]
+	call WriteString
+	jmp Uloha3
+
+Nevyhrala:
+	mov EDX, offset nevyhralaSprava
+	call WriteString
+
+Uloha3:
+	
+	call crlf
+	xor EAX, EAX
+	xor EBX, EBX
+	xor ECX, ECX
+	xor ESI, ESI
+
+	mov AX, HladanaOsoba
+	imul EAX, pocCasov
+	imul EAX, type Casy
+	mov ECX, pocCasov
+	fldz
+
+PrehladajCasyLoop:
+	movzx EDX, Casy[EAX + ESI * type Casy]
+	fild word ptr Casy[EAX + ESI * type Casy]
+	fadd
+	inc ESI
+	loop PrehladajCasyLoop
+
+	mov EAX, EBX
+	call WriteFloat
+	
+
+	
+	
+	exit
+main ENDP
+
+END main
